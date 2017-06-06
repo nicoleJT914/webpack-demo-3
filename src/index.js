@@ -1,19 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import React, {Component} from 'react'
+import './App.css'
 
-function tick() {
-  const element = (
-    <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {new Date().toLocaleTimeString()}.</h2>
-    </div>
-  );
-  ReactDOM.render(
-    element,
-    document.getElementById('root')
-  );
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      newTodo: 'test',
+      todoList: [
+        {id:1, title:'第一个待办'}
+      ]
+    }
+  }
+
+  render() {
+    let todos = this.state.todoList.map((item, index) => {
+      return <li>{item.title}</li>
+    })
+    return (
+      <div className="App">
+        <div className="App-header">
+          <h2>Welcome to React</h2>
+        </div>
+        <h1>我的待办</h1>
+        <div className="inputWrapper">
+          <input type="text" value={this.state.newTodo} />
+        </div>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+        <ol>
+          {todos}
+        </ol>
+      </div>
+    )
+  }
 }
-setInterval(tick, 1000);
